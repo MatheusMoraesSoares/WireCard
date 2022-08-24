@@ -5,6 +5,7 @@ import { HashManage } from "../services/HashManage";
 import IdGenerator from "../services/IdGenerator";
 import { LoginInputDTO } from "../types/LoginInputDTO";
 import { SignupInputDTO } from "../types/SignupInputDTO";
+import { CustomError } from "./errors/CustomError";
 import { InvalidInputError } from "./errors/InvalidInputError";
 import { NotFoundError } from "./errors/NotFoundError";
 
@@ -14,9 +15,9 @@ export class UserBusiness {
     ){}
 
     signUp = async (user: SignupInputDTO) => {
-        const { name, email, password } = user
+        const { name, email, cpf, password } = user
 
-        if(!name || !email || !password ) {
+        if(!name || !email || !cpf || !password ) {
             throw new InvalidInputError("Invalid input. name, last name, email, password and participation are required")
         }
 
@@ -28,6 +29,10 @@ export class UserBusiness {
             throw new InvalidInputError("Invalid email. Email must contain @")
         }
 
+        if(cpf.length != 11) {
+            throw new CustomError(500, "Cpf must have 11 characters")
+        }
+
         const registeredUser = await this.userDatabase.getUserByEmail(email)
 
         if(registeredUser) {
@@ -37,7 +42,7 @@ export class UserBusiness {
         const id = IdGenerator.idGenerator()
         const cryptedPassword = await HashManage.generateHash(password)
 
-        const newUser = new User(id, name, email, cryptedPassword)
+        const newUser = new User(id, name, email, cpf, cryptedPassword)
 
         await this.userDatabase.insertUser(newUser)
 

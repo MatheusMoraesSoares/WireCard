@@ -10,9 +10,9 @@ export class UserController {
 
     signUp = async (req: Request, res: Response) => {
         try {
-            const { name, email, password } = req.body
+            const { name, email, cpf, password } = req.body
 
-            const user: SignupInputDTO = { name, email, password }
+            const user: SignupInputDTO = { name, email, cpf, password }
 
             const token = await this.userBusiness.signUp(user)
 

@@ -4,6 +4,7 @@ export class User {
         private id: string,
         private name: string,
         private email: string,
+        private cpf: string,
         private password: string
     ) { }
 
@@ -19,6 +20,10 @@ export class User {
         return this.email
     }
 
+    public getCpf(): string {
+        return this.cpf
+    }
+
     public getPassword(): string {
         return this.password
     }
@@ -28,6 +33,7 @@ export class User {
             user.id,
             user.name,
             user.email,
+            user.cpf,
             user.password
         )
     }
