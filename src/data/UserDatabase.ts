@@ -11,6 +11,7 @@ export class UserDatabase extends BaseDatabase {
                     id: newUser.getId(),
                     name: newUser.getName(),
                     email: newUser.getEmail(),
+                    cpf: newUser.getCpf(),
                     password: newUser.getPassword()
                 })
                 .into(UserDatabase.TABLE)
