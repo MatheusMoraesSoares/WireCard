@@ -14,15 +14,15 @@ export class CardController {
             const { name, number, expiration, cvv } = req.body
             const token = req.headers.authorization as string
 
-            const card = Authenticator.getTokenData(token)
+            const user = Authenticator.getTokenData(token)
 
-            if(!card) {
+            if(!user) {
                 throw new InvalidInputError("You must be logged in to perform this action")
             }
 
             const newCard: CardInputDTO = { name, number, expiration, cvv }
 
-            await this.cardBusiness.newCard(newCard, card.id)
+            await this.cardBusiness.newCard(newCard, user.id)
 
             res.status(201).send({ message: `Card inserted successfully.`})
             

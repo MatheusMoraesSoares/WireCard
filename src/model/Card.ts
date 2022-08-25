@@ -1,11 +1,17 @@
 
 export class Card {
     constructor(
+        private id: string,
         private name: string,
         private number: string,
         private expiration: Date,
         private cvv: number,
+        private userId: string
     ) {}
+
+    public getId(): string {
+        return this.id
+    }
 
     public getName(): string {
         return this.name
@@ -23,12 +29,18 @@ export class Card {
         return this.cvv
     }
 
-    static toUserModel(user: any): Card {
+    public getUserId(): string {
+        return this.userId
+    }
+
+    static toCardModel(card: any): Card {
         return new Card(
-            user.name,
-            user.number,
-            user.expiration,
-            user.cvv
+            card.id,
+            card.name,
+            card.number,
+            card.expiration,
+            card.cvv,
+            card.userId
         )
     }
 }
