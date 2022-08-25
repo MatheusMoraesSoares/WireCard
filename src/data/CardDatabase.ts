@@ -6,7 +6,7 @@ export class CardDatabase extends BaseDatabase {
 
     newCard = async (newCard: Card) => {
         try {
-            return await BaseDatabase.connection()
+            await BaseDatabase.connection()
                 .insert({
                     id: newCard.getId(),
                     name: newCard.getName(),

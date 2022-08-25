@@ -4,3 +4,18 @@ CREATE TABLE user(
 	email VARCHAR(255) UNIQUE NOT NULL,
 	password VARCHAR(255) NOT NULL
 )
+
+CREATE TABLE card(
+	id VARCHAR(255) UNIQUE NOT NULL,
+	name VARCHAR(255) NOT NULL,
+	number varchar(255) NOT NULL,
+	date VARCHAR(255) NOT NULL,
+	cvv VARCHAR(255) NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES user(id)
+)
+
+CREATE TABLE payment(
+	amount VARCHAR(255) NOT NULL,
+	card_number VARCHAR(255) NOT NULL,
+	FOREIGN KEY (card_id) REFERENCES card(id)
+)
