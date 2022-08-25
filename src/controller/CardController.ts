@@ -12,6 +12,7 @@ export class CardController {
     newCard = async (req: Request, res: Response) => {
         try {
             const { name, number, expiration, cvv } = req.body
+            
             const token = req.headers.authorization as string
 
             const user = Authenticator.getTokenData(token)

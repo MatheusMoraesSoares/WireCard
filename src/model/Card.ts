@@ -4,7 +4,7 @@ export class Card {
         private id: string,
         private name: string,
         private number: string,
-        private expiration: Date,
+        private expiration: string,
         private cvv: number,
         private userId: string
     ) {}
@@ -21,7 +21,7 @@ export class Card {
         return this.number
     }
 
-    public getExpiration(): Date {
+    public getExpiration(): string {
         return this.expiration
     }
 

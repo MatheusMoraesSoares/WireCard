@@ -2,7 +2,7 @@ import { Card } from "../model/Card";
 import { BaseDatabase } from "./BaseDataBase";
 
 export class CardDatabase extends BaseDatabase {
-    private static TABLE = 'card_info'
+    private static TABLE = 'card'
 
     newCard = async (newCard: Card) => {
         try {
@@ -11,9 +11,9 @@ export class CardDatabase extends BaseDatabase {
                     id: newCard.getId(),
                     name: newCard.getName(),
                     number: newCard.getNumber(),
-                    expiration: newCard.getExpiration(),
+                    date: newCard.getExpiration(),
                     cvv: newCard.getCvv(),
-                    userId: newCard.getUserId()
+                    user_id: newCard.getUserId()
                 })
                 .into(CardDatabase.TABLE)
                 

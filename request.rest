@@ -8,8 +8,6 @@ Content-Type: application/json
     "cpf": "12345678910",
     "password": "123456"
 }
-###"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwN2RkN2MyLTI3MWMtNGE1My1hMWFkLTIxOTQwMTkxM2ZjZCIsImlhdCI6MTY2MTQ1NDYyOSwiZXhwIjoxNjYxNTQxMDI5fQ.iZ-Di-qUUBoeZE1Fks7fF8U614Vmo2Ui_ZUTIZsZ7Z8"
-
 
 ### login
 POST http://localhost:3003/user/login
@@ -18,4 +16,15 @@ Content-Type: application/json
 {
     "email": "matheus@gmail.com",
     "password": "123456"
+}
+
+### cadastrar cartao
+POST http://localhost:3003/card/cadatrar
+Content-Type: application/json
+
+{
+    "name": "matheus",
+    "number": "987465321987",
+    "expiration": "02/2026",
+    "cvv": 333
 }

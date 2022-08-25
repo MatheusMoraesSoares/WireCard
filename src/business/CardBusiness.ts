@@ -19,9 +19,9 @@ export class CardBusiness {
 
         const id = IdGenerator.idGenerator()
         const newCard = new Card ( id, name, number, expiration, cvv, userId )
-
+        
         await this.cardDatabase.newCard(newCard)
-
+        
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message)
         }
