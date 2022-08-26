@@ -1,4 +1,5 @@
 import { PaymentDatabase } from "../data/PaymentDatabase";
+import IdGenerator from "../services/IdGenerator";
 import { PaymentCardInputDTO } from "../types/PaymentCardInputDTO";
 import { CustomError } from "./errors/CustomError";
 import { InvalidInputError } from "./errors/InvalidInputError";
@@ -16,13 +17,14 @@ export class PaymentBusiness {
                 throw new InvalidInputError("Invalid input. amount and card number are required")
             }
             
-            const cardId: any = await this.paymentDatabase.getCardByNumber(paymentCard.cardNumber)//agora tem que pegar o cartao do usuario certo(nao esqueça que tem como pegar o id do usuario logado usando seu token)
+            const cardInfo: any = await this.paymentDatabase.getCardByNumber(paymentCard.cardNumber)//agora tem que pegar o cartao do usuario certo(nao esqueça que tem como pegar o id do usuario logado usando seu token)
 
-            if(!cardId) {
+            if(!cardInfo) {
                 throw new NotFoundError("Card number not yet inserted.")
             }
             
-            await this.paymentDatabase.newPaymentCard(paymentCard, cardId)
+            const id = IdGenerator.idGenerator()
+            await this.paymentDatabase.newPaymentCard(paymentCard, cardInfo.id, id)
             
         } catch (error: any) {
             throw new CustomError(500, error.sqlMessage || error.message)

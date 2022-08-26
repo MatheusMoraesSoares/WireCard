@@ -10,22 +10,24 @@ export class PaymentDatabase extends BaseDatabase {
             const result: any = await BaseDatabase.connection()
                 .select("*")
                 .from(PaymentDatabase.TABLE_CARD)
-                .where({cardNumber})
+                .where({number: cardNumber})
             
-            return result
+            return result[0]
             
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message)
         }
     }
 
-    newPaymentCard = async(paymentCard: PaymentCardInputDTO, cardId: string) => {
+    newPaymentCard = async(paymentCard: PaymentCardInputDTO, cardId: string, id: string) => {
         try {
+            console.log(cardId)
             await BaseDatabase.connection()
                 .insert({
+                    id,
                     amount: paymentCard.amount,
-                    cardNumber: paymentCard.cardNumber,
-                    cardId
+                    card_number: paymentCard.cardNumber,
+                    card_id: cardId
                 })
                 .into(PaymentDatabase.TABLE)
 
